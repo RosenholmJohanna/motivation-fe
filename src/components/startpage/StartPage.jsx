@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
-import { useSelector } from 'react-redux';
+// import React, { useEffect } from "react";
+// import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { LoginButton } from "../login/Login";
 
 const StartPage = () => {
 //   const accessToken = useSelector((store) => store.user.accessToken);
@@ -21,7 +22,7 @@ const StartPage = () => {
   return (
     <TextWrapper> 
       <StartText>Let yor motivational balance decide what to do!</StartText>
-      <StartButton type="button" onClick={goLogin}>Start</StartButton> 
+      <LoginButton type="button" onClick={goLogin}>Start</LoginButton> 
     </TextWrapper>
     
   );
@@ -31,6 +32,7 @@ export default StartPage;
 
 
 export const TextWrapper = styled.div`
+margin-top: 20%;
 padding: 20px; 
 text-align: center;
 justify-content: center;
@@ -38,21 +40,7 @@ justify-content: center;
  `
 
 export const StartText = styled.p`
-  font-family: 'Tangerine';
-  text-shadow:4px 4px 4px #aaa;
-  font-size: 24px;
-  margin-bottom: 10px; 
-`;
-
-export const StartButton = styled.button`
-width: 7em;
-height:30px;
-border-radius:25px;
-/* background-color: #106c72; */
-margin-top: 50%;
-margin: 2%;
-justify-content: center;
-color: white;
-  background-color: #ddc963;
-box-shadow: 4px 4px 4px #aaa;
+  text-shadow:0.4px 1px 1px #e95bb3;
+  font-size: 1.5rem;
+  font-weight: 200;
 `;

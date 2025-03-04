@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styled from 'styled-components';
 
 
 const Login = () => {
@@ -34,58 +35,110 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <LoginContainer>
       <form
         onSubmit={handleLogin}
         className="bg-white shadow-lg rounded px-8 pt-6 pb-8 mb-4"
       >
         <h2 className="text-2xl mb-4 text-center">Login</h2>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Username
-          </label>
           <input
+          placeholder="Username"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             required
           />
         </div>
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Password
-          </label>
           <input
+          placeholder="Password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             required
           />
         </div>
         <div className="flex items-center justify-between">
-          <button
+          <LoginButton
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Log In
-          </button>
+          </LoginButton>
         </div>
         {message && (
           <div className="mt-4 text-center text-red-500">{message}</div>
         )}
       </form>
-    </div>
+      <RegisterLinkText>
+          Register here if new to Motivational{" "}
+         </RegisterLinkText>
+    </LoginContainer>
   );
 };
 
 export default Login;
 
+export const LoginButton=styled.button`
+width: 15em;
+height:40px;
+border-radius:25px;
+background-color: #f5008f;
+margin-bottom: 5%;
+margin-top: 10%;
+justify-content: center;
+color: white;
+font-weight: 600;
+font-size: 0.9em;
+`
+
+export const LoginContainer = styled.div`
+color: white;
+margin-top: 20%;
+margin-bottom: 50%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+ align-content: center; 
+align-items: center;
+text-align: center;
+background-color: #1e1f28; 
+//background-color: #98afc7;
+margin-left: 15%;
+margin-right: 20%;
+padding: 5%;
+border-radius: 25px;
+
+  @media (min-width: 768px) {
+  margin-bottom: 30%;
+  } 
+  
+  @media (min-width: 1024px) {
+  margin-top: 3%;
+  margin-bottom: 15%;
+  } 
+
+a {
+  text-decoration: none; 
+  color: white;
+  text-decoration: none; 
+}
+`
+
+export const RegisterLinkText = styled.p`
+  margin-top: 3%;
+  color: #f0f6fc;
+  text-decoration: underline;
+  a {
+    text-decoration: none;
+    color: white;
+    text-decoration: none;
+  }
+`;
 
 
-// import { useState, useEffect } from 'react';
-// import styled from 'styled-components';
+
+
 // import { useNavigate } from 'react-router-dom';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { loginUser } from '../../features/auth/authActions';
@@ -142,48 +195,8 @@ export default Login;
 // export default Login;
 
 
-// export const LoginButton=styled.button`
-// width: 15em;
-// height:40px;
-// border-radius:25px;
-// background-color: #c4aead;
-// margin-bottom: 5%;
-// margin-top: 10%;
-// justify-content: center;
-// border: 0.5px solid white
-// `
-
-// export const LoginContainer = styled.div`
-// color: white;
-// margin-top: 20%;
-// margin-bottom: 50%;
-// display: flex;
-// flex-direction: column;
-// justify-content: center;
-//  align-content: center; 
-// align-items: center;
-// text-align: center;
-
-//   @media (min-width: 768px) {
-//   margin-bottom: 30%;
-//   } 
-  
-//   @media (min-width: 1024px) {
-//   margin-top: 3%;
-//   margin-bottom: 15%;
-//   } 
-
-// a {
-//   text-decoration: none; 
-//   color: white;
-//   text-decoration: none; 
-// }
-// `
 
 
-
-// import React, { useEffect, useState } from "react";
-// import styled from "styled-components";
 // import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate, Link } from "react-router-dom";
 // import { LOGIN_URL } from "../utils";
@@ -296,17 +309,6 @@ export default Login;
 //   border: 0.5px solid white;
 // `;
 
-// export const RegisterLinkText = styled.p`
-//   margin-top: 3%;
-//   color: #f0f6fc;
-//   text-decoration: underline;
-//   a {
-//     text-decoration: none;
-//     color: white;
-//     text-decoration: none;
-//   }
-// `;
-
 // export const LoginContainer = styled.div`
 //   margin-top: 10%;
 //   margin-bottom: 50%;
@@ -333,28 +335,7 @@ export default Login;
 //   }
 // `;
 
-// export const LoginForm = styled.div`
-//   justify-content: center;
-//   margin-top: 30%;
-//   flex-direction: column;
-//   width: 80%;
-//   padding: 2%;
-//   background-color: #98afc7;
-//   border-radius: 5%;
-//   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
-//   @media (min-width: 768) {
-//     margin-top: 10%;
-//     width: 15%;
-//     flex-direction: flex-wrap;
-//   }
-
-//   @media (min-width: 1024px) {
-//     margin-top: 5%;
-//     width: 40%;
-//     flex-direction: flex-wrap;
-//   }
-// `;
 // export const Logintext = styled.h3`
 //   margin: 2%;
 // `;
