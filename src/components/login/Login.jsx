@@ -1,99 +1,184 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../../features/auth/authActions';
-//import { selectAccessToken } from '../features/auth/authSelectors';
-import { selectAccessToken } from '../../features/auth/authSlice';
-//import { login } from "../authSlice";
+import { useState } from "react";
+
 
 const Login = () => {
-  const accessToken = useSelector(selectAccessToken);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(loginUser({ username, password })); 
+      //  const response = await fetch("https://motivation-be.onrender.com/login", {
+        const response = await fetch("http://localhost:8080/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setMessage(`Welcome, ${data.user.username}!`);
+      } else {
+        setMessage("Login failed: " + data.message);
+      }
     } catch (error) {
-      console.error('Login error:', error);
+      setMessage(error, "An error occurred during login.");
     }
   };
 
-
-useEffect(() => {
-  if (accessToken) {
-    navigate('/profile');
-  }
-}, [accessToken, navigate]);
-
   return (
-    <LoginContainer>
-     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <LoginButton type="submit">Login</LoginButton>
-    </form>
-    </LoginContainer>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <form
+        onSubmit={handleLogin}
+        className="bg-white shadow-lg rounded px-8 pt-6 pb-8 mb-4"
+      >
+        <h2 className="text-2xl mb-4 text-center">Login</h2>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Username
+          </label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            required
+          />
+        </div>
+        <div className="mb-6">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Password
+          </label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            required
+          />
+        </div>
+        <div className="flex items-center justify-between">
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Log In
+          </button>
+        </div>
+        {message && (
+          <div className="mt-4 text-center text-red-500">{message}</div>
+        )}
+      </form>
+    </div>
   );
 };
 
 export default Login;
 
 
-export const LoginButton=styled.button`
-width: 15em;
-height:40px;
-border-radius:25px;
-background-color: #c4aead;
-margin-bottom: 5%;
-margin-top: 10%;
-justify-content: center;
-border: 0.5px solid white
-`
+
+// import { useState, useEffect } from 'react';
+// import styled from 'styled-components';
+// import { useNavigate } from 'react-router-dom';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { loginUser } from '../../features/auth/authActions';
+// //import { selectAccessToken } from '../features/auth/authSelectors';
+// import { selectAccessToken } from '../../features/auth/authSlice';
+// //import { login } from "../authSlice";
+
+// const Login = () => {
+//   const accessToken = useSelector(selectAccessToken);
+//   const [username, setUsername] = useState('');
+//   const [password, setPassword] = useState('');
+//   const navigate = useNavigate();
+//   const dispatch = useDispatch();
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       await dispatch(loginUser({ username, password })); 
+//     } catch (error) {
+//       console.error('Login error:', error);
+//     }
+//   };
 
 
+// useEffect(() => {
+//   if (accessToken) {
+//     navigate('/profile');
+//   }
+// }, [accessToken, navigate]);
 
-export const LoginContainer = styled.div`
-margin-top: 10%;
-margin-bottom: 50%;
-display: flex;
-flex-direction: column;
-justify-content: center;
- align-content: center; 
-align-items: center;
-text-align: center;
+//   return (
+//     <LoginContainer>
+//      <form onSubmit={handleSubmit}>
+//       <input
+//         type="text"
+//         placeholder="username"
+//         value={username}
+//         onChange={(e) => setUsername(e.target.value)}
+//         required
+//       />
+//       <input
+//         type="password"
+//         placeholder="Password"
+//         value={password}
+//         onChange={(e) => setPassword(e.target.value)}
+//         required
+//       />
+//       <LoginButton type="submit">Login</LoginButton>
+//     </form>
+//     </LoginContainer>
+//   );
+// };
 
-  @media (min-width: 768px) {
-  margin-bottom: 30%;
-  } 
+// export default Login;
+
+
+// export const LoginButton=styled.button`
+// width: 15em;
+// height:40px;
+// border-radius:25px;
+// background-color: #c4aead;
+// margin-bottom: 5%;
+// margin-top: 10%;
+// justify-content: center;
+// border: 0.5px solid white
+// `
+
+// export const LoginContainer = styled.div`
+// color: white;
+// margin-top: 20%;
+// margin-bottom: 50%;
+// display: flex;
+// flex-direction: column;
+// justify-content: center;
+//  align-content: center; 
+// align-items: center;
+// text-align: center;
+
+//   @media (min-width: 768px) {
+//   margin-bottom: 30%;
+//   } 
   
-  @media (min-width: 1024px) {
-  margin-top: 3%;
-  margin-bottom: 15%;
-  } 
+//   @media (min-width: 1024px) {
+//   margin-top: 3%;
+//   margin-bottom: 15%;
+//   } 
 
-a {
-  text-decoration: none; 
-  color: white;
-  text-decoration: none; 
-}
-`
+// a {
+//   text-decoration: none; 
+//   color: white;
+//   text-decoration: none; 
+// }
+// `
 
 
 
