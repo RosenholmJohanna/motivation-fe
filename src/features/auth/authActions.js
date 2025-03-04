@@ -1,11 +1,14 @@
 import { setAccessToken, setLoading } from './authSlice';
-import { BASE_URL } from '../../utils';
+ //import { BASE_URL } from '../../utils';
+
+ const BACKEND_URL = "https://motivation-be.onrender.com"; 
 
 export const loginUser = (credentials) => async (dispatch) => {
-   dispatch(setLoading(true)); // Start loading
+   dispatch(setLoading(true)); 
    try {
-     // correctly format the fetch request with headers inside the options object
-     const response = await fetch(BASE_URL, {
+    // const response = await fetch(BASE_URL, {
+    //  const response = await fetch("https://motivation-be.onrender.com/login", {
+      const response = await fetch(`${BACKEND_URL}/login`, {
        method: 'POST',
        headers: {
          'Content-Type': 'application/json',
@@ -18,7 +21,8 @@ export const loginUser = (credentials) => async (dispatch) => {
      }
 
      const data = await response.json();
-     dispatch(setAccessToken(data.token)); // dispatch token to Redux
+     console.log(data)
+     dispatch(setAccessToken(data.token)); 
      return data.token;
     
    } catch (error) {

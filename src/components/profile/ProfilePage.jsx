@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { selectAccessToken } from '../../features/auth/authSelectors';
 
@@ -8,7 +8,7 @@ const ProfilePage = () => {
   
     useEffect(() => {
       if (accessToken) {
-        setLoading(false); //  stop loading if token available
+        setLoading(false);
       }
     }, [accessToken]);
   

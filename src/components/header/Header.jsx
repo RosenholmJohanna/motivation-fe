@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import SubNavBar from "./SubNavbar";
 
 
 export const Header = () => {
@@ -6,6 +7,9 @@ export const Header = () => {
     <>
       <HeaderContainer>
         <HeaderText>M</HeaderText>
+        <div>
+        <SubNavBar isLoggedIn={true} />
+        </div>
       </HeaderContainer>
     </>
   ) 

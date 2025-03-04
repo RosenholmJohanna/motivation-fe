@@ -36,12 +36,11 @@ const Login = () => {
 
   return (
     <LoginContainer>
-      <form
+        <h2>Login</h2>
+        <form
         onSubmit={handleLogin}
-        className="bg-white shadow-lg rounded px-8 pt-6 pb-8 mb-4"
       >
-        <h2 className="text-2xl mb-4 text-center">Login</h2>
-        <div className="mb-4">
+        <>
           <input
           placeholder="Username"
             type="text"
@@ -49,8 +48,8 @@ const Login = () => {
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </div>
-        <div className="mb-6">
+        </>
+        <>
           <input
           placeholder="Password"
             type="password"
@@ -58,14 +57,14 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
-        <div className="flex items-center justify-between">
+        </>
+        <>
           <LoginButton
             type="submit"
           >
             Log In
           </LoginButton>
-        </div>
+        </>
         {message && (
           <div className="mt-4 text-center text-red-500">{message}</div>
         )}
@@ -81,21 +80,19 @@ export default Login;
 
 export const LoginButton=styled.button`
 width: 15em;
-height:40px;
+height:2.2rem;
 border-radius:25px;
 background-color: #f5008f;
 margin-bottom: 5%;
 margin-top: 10%;
 justify-content: center;
 color: white;
-font-weight: 600;
 font-size: 0.9em;
 `
 
 export const LoginContainer = styled.div`
 color: white;
-margin-top: 20%;
-margin-bottom: 50%;
+margin-top: 10rem;
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -103,14 +100,11 @@ justify-content: center;
 align-items: center;
 text-align: center;
 background-color: #1e1f28; 
-//background-color: #98afc7;
-margin-left: 15%;
-margin-right: 20%;
 padding: 5%;
 border-radius: 25px;
 
   @media (min-width: 768px) {
-  margin-bottom: 30%;
+  margin-top: 40rem;
   } 
   
   @media (min-width: 1024px) {
