@@ -1,17 +1,22 @@
 import styled from "styled-components";
 import SubNavBar from "./SubNavbar";
+import Avatar from "../avatar/AvatarStyled";
+import { mockUsers } from "../../mockData/mockUser";
 
+const user = mockUsers[1];
 
 export const Header = () => {
   return (
-    <>
+    <div>
       <HeaderContainer>
         <HeaderText>M</HeaderText>
-        <div>
-        <SubNavBar isLoggedIn={true} />
-        </div>
+        <AvatarContainer>
+        <UserName>{user.name}</UserName>
+          <Avatar src={user.avatar} alt={user.name} />
+        </AvatarContainer>
       </HeaderContainer>
-    </>
+      <SubNavBar isLoggedIn={true} />
+    </div>
   ) 
 }
 
@@ -46,3 +51,14 @@ font-weight: lighter;
     margin-right: 40%;
   } 
 `
+
+const AvatarContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const UserName = styled.span`
+  margin-right: 5px; 
+  font-size: 0.9rem;
+  color: #f9ddf1fd;
+`;

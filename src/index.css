@@ -59,14 +59,15 @@ button {
   a {
     font-weight: 500;
     text-decoration: inherit;
-    font-weight: 400;
+    font-size: 0.9rem;
     border: none;
     border-style: none;
     padding: 0;
-    margin-left: 3%;
+    margin-top:0.35rem ;
+    margin-left: 2%;
   }
   a:hover {
-    color: darkorange;
+    color: rgba(8, 133, 243, 0.866);
     font-weight: 600;
   }
 
